@@ -1,0 +1,103 @@
+TITLE
+Arcane Bestiary Manager
+Varka Carter
+CSCI 200 – Final Project
+
+PROBLEM DESCRIPTION
+
+This program implements an “Arcane Bestiary Manager,” 
+a command-line tool for organizing, storing, and manipulating 
+a collection of fantasy creatures. Each creature has a name, type, 
+elemental affinity, level, and three numerical statistics. 
+
+The program allows users to build a list of creatures, calculate threat values, 
+generate encounters based on a target difficulty, filter and search within the 
+bestiary, and save or load data from a file. The goal is to provide a structured 
+and extendable way of managing creature data through a simple interactive menu.
+
+PROGRAM DOCUMENTATION
+
+When the program begins, it attempts to load existing creature data from a file 
+named creatures.txt. If the file exists, the program populates the bestiary; if 
+not, it starts with an empty list. The user interacts with the program through a 
+numbered menu, choosing options to list creatures, add new ones, remove creatures 
+by name, show the strongest creature, generate an encounter based on a target 
+average threat and creature count, compute the overall average threat, or save 
+and exit. The program continues to loop until the user selects the exit option.
+
+The code is organized into several components. The Creature class stores individual 
+creature data and provides methods for calculating threat level and producing a 
+formatted description. The Bestiary class manages a dynamic list of Creature objects 
+and implements operations such as adding, removing, sorting, filtering, calculating 
+averages, generating encounters, and handling file input and output. A small Constants 
+namespace stores weight values used in threat calculations. The main.cpp file provides 
+the user interface and drives the rest of the program.
+
+If more time were available, I would extend the program with additional features such 
+as random encounter generation, rarity modifiers, more robust input validation, and 
+possibly a graphical interface. Compared to my original proposal, the encounter-generation 
+algorithm became significantly more sophisticated. I initially expected to include only 
+simple listing and filtering, but implementing a greedy algorithm that matches a target 
+average threat provided more meaningful functionality and allowed for deeper use of the 
+underlying data structures.
+
+CLASS DESCRIPTION
+
+The Creature class is the primary custom class in the project. It encapsulates all data 
+and behaviors associated with a fantasy creature, including name, type, element, level, 
+aggression, resilience, and intelligence. It contains functions to compute the threat level 
+and to return a formatted string describing the creature. These responsibilities are 
+intentionally isolated in the class so that higher-level logic does not need to understand 
+the structure of a creature’s data. This abstraction makes the overall program easier to 
+manage and extend.
+
+The Bestiary class serves as the controller for a collection of Creature objects. It 
+supports adding and removing creatures, listing and sorting them, filtering by element, 
+generating encounters, and performing file persistence. Together, these two classes form 
+the main architecture of the program and keep the design modular.
+
+LIST DATA STRUCTURE
+
+The program uses a std::vector<Creature> to store the list of creatures. A vector was chosen 
+because it provides dynamic sizing, efficient iteration, and compatibility with sorting 
+algorithms. Most of the program’s operations require sequential access, sorting, or 
+repeated passes over the data, all of which are efficient with a vector. The encounter 
+generator also uses a vector of creature pointers to create a sorted view without duplicating 
+full objects. A linked list was considered but rejected because random access and sorting 
+operations would be less efficient.
+
+FILE I/O
+
+The program uses file input and output to save and restore the bestiary between runs. When 
+the program starts, it calls loadFromFile to read data from creatures.txt, parsing each line 
+into creature attributes. Invalid or malformed lines are safely ignored. When the user chooses 
+to exit, the program writes all current creatures to creatures.txt via saveToFile. This allows 
+users to build up a persistent creature database instead of recreating the data each time the 
+program is executed.
+
+TESTS
+
+Adding a valid creature.
+Input: Name “Goblin”, type “Physical”, element “Earth”, level 2, stats 4/3/1.
+Expected: The creature is added and appears in the list.
+
+Removing an existing creature.
+Input: Remove “Goblin”.
+Expected: The creature is removed and does not appear in subsequent listings.
+
+Removing a creature that does not exist.
+Input: Remove “Hydra”.
+Expected: Program prints “Not found.” and continues normally.
+
+Generating an encounter with a target average threat and count.
+Input: Target average threat 5.0, count 3.
+Expected: The program selects creatures (including repeats if necessary) whose 
+average threat approaches the target value.
+
+Calculating average threat when the list is empty.
+Input: Selecting the average threat option when the bestiary has no creatures.
+Expected: Output is 0.0 with no errors.
+
+Loading from a malformed file.
+Input: A line in creatures.txt is missing fields.
+Expected: The program skips the line and continues loading valid entries without crashing.

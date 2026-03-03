@@ -1,0 +1,10 @@
+Lightwalker,Energetic,Kuster,7,4,3.5,5
+Demon,Physical,Seita,10,9,8,4
+Animalkin,Physical,Seita,3,4.5,5,4
+Naturekin,Physical,Kuster,2,1.5,2,3
+Blazekind,Energetic,Seita,5,7,6,3.5
+Frostkind,Physical,Kuster,5,5,4,7
+Waterkin,Physical,Seita,4,4.5,3.5,8.5
+Psychic,Energetic,Kuster,2,2,2,8
+Lunakin,Physical,Seita,5,3.5,6,6
+Shadower,Energetic,Seita,7,7.5,4,3

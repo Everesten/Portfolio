@@ -1,0 +1,41 @@
+assignment_name="A12_ImageCompression"
+semester="F24"
+
+[config]
+    impl_to_use="Python"
+    autograder_version="4.1.0"
+
+    test_directory="./student_tests"
+
+    enforce_submission_limit=false
+    submission_limit=3
+
+    take_highest=true
+
+    allow_extra_credit=false
+    perfect_score=14
+    max_score=14
+
+
+[config.python]
+    buffer_size=10485760 # 10 * 2 ** 20
+
+
+[build]
+
+    # Things that need to be considered when building
+    use_starter_code=true
+    starter_code_source="./starter_code/helper_library.py"
+    use_data_files=true
+    data_files_source="student_tests/data/public"
+    
+    allow_private=true
+
+    build_student=true
+
+    build_gradescope=true
+
+    student_work_folder="student_work"
+    private_tests_regex='^test_private_?\w*\.py$'
+    public_tests_regex='^test_public_?\w*\.py$'
+
